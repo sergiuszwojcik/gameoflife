@@ -15,12 +15,12 @@ public class CellState {
         this.singleCell.setBoard(board);
     }
 
-    private int countLiveCellNeighbours(int x, int y) {
+    public int countLiveCellNeighbours(int x, int y) {
         int countAliveCells = 0;
         for (int cellX = x - 1; cellX <= x + 1; cellX++) {
             for (int cellY = y - 1; cellY <= y + 1; cellY++) {
                 if ((cellX != x || cellY != y) && cellX >= 0 && cellX < boardLenght && cellY >= 0 && cellY < boardWidth) {
-                    if (singleCell.isCellAlive(cellX, cellY)) {
+                    if (singleCell.isCellPopulated(cellX, cellY)) {
                         countAliveCells++;
                     }
                 }
@@ -29,7 +29,7 @@ public class CellState {
         return countAliveCells;
     }
     public char setNewCellState(int x, int y) {
-        return singleCell.cellExistenceRules(countLiveCellNeighbours(x, y), singleCell.isCellAlive(x, y));
+        return singleCell.getCellState(countLiveCellNeighbours(x, y), singleCell.isCellPopulated(x, y));
     }
 
 }

@@ -7,16 +7,24 @@ public class SingleCell {
 
     private String[] board;
 
-    public boolean isCellAlive(int x, int y) {
+    public boolean isCellPopulated(int x, int y) {
         return board[x].charAt(y) == ALIVE_CELL;
     }
 
-    public char cellExistenceRules(int aliveCells, boolean isCellAlive) {
+    public boolean cellExistenceRules(int aliveCells, boolean isCellAlive) {
         if (isCellAlive && (aliveCells < 2 || aliveCells > 3)) {
-            return DEATH_CELL;
+            return false;
         } else if (isCellAlive && (aliveCells == 3 || aliveCells == 2)) {
-            return ALIVE_CELL;
+            return true;
         } else if (!isCellAlive && aliveCells == 3) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public char getCellState(int aliveCells, boolean isCellAlive) {
+        if (cellExistenceRules(aliveCells, isCellAlive)) {
             return ALIVE_CELL;
         } else {
             return DEATH_CELL;
@@ -25,5 +33,9 @@ public class SingleCell {
 
     public void setBoard(String[] board) {
         this.board = board;
+    }
+
+    public String[] getBoard() {
+        return board;
     }
 }
